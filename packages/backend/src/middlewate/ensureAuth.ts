@@ -8,7 +8,7 @@ interface IPayload {
 export default function ensureAuth(req: Request, res: Response, next: NextFunction) {
     const authToken = req.headers['authorization'];
 
-    if (authToken) {
+    if (!authToken) {
         return res.status(401).json({
             errorCode: 'token.invalid'
         });
