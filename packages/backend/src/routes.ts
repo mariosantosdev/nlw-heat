@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import AuthUserController from './controllers/AuthUserController';
 import MessageController from './controllers/MessageController';
+import UserController from './controllers/UserController';
 import ensureAuth from './middlewate/ensureAuth';
 
 const router = Router();
@@ -10,6 +11,9 @@ router.post('/authenticate', AuthUserController.handle)
 // Create Message
 router.post('/messages', ensureAuth, MessageController.create)
 router.get('/messages', MessageController.getMessages)
+
+// Get My Profile
+router.get('/profile', ensureAuth, UserController.getUser);
 
 router.get('/auth/github', (req: Request, res: Response) => {
     res.redirect(
