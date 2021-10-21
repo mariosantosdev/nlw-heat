@@ -1,5 +1,4 @@
 # NLW Heat 2021
-# NLW Heat 2021
 
 ## Backend
 
