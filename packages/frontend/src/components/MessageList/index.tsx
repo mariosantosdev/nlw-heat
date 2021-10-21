@@ -1,3 +1,4 @@
+import io from 'socket.io-client'
 import styles from './styles.module.scss'
 
 import logo from '../../assets/logo.svg'
@@ -13,11 +14,33 @@ type Message = {
     }
 }
 
+const MessageQueue: Message[] = []
+
+const socket = io('http://localhost:8020');
+
+socket.on('new_message', (data: Message) => MessageQueue.push(data));
+
 export default function MessageList() {
     const [messages, setMessages] = useState<Message[]>([]);
 
     useEffect(() => {
         api.get<Message[]>('messages').then(({ data }) => setMessages(data));
+    }, []);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (MessageQueue.length > 0) {
+                setMessages(prevState => ([
+                    MessageQueue[0],
+                    prevState[0],
+                    prevState[1]
+                ].filter(Boolean)))
+
+                MessageQueue.shift();
+            }
+        }, 5000);
+
+        return () => clearInterval(timer);
     }, []);
 
     return (
