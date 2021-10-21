@@ -8,7 +8,7 @@ import SendMessageForm from './components/SendMessageForm';
 function App() {
     const { user } = useUserContext();
     return (
-        <main className={styles.contentWrapper}>
+        <main className={`${styles.contentWrapper} ${user && styles.contentSigned}`}>
             <MessageList />
             {user ? <SendMessageForm /> : <LoginBox />}
         </main>
