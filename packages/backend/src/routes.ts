@@ -9,6 +9,7 @@ router.post('/authenticate', AuthUserController.handle)
 
 // Create Message
 router.post('/messages', ensureAuth, MessageController.create)
+router.get('/messages', MessageController.getMessages)
 
 router.get('/auth/github', (req: Request, res: Response) => {
     res.redirect(

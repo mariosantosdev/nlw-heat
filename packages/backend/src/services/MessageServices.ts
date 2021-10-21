@@ -33,4 +33,16 @@ export default class MessageService {
 
         return message;
     }
+
+    async getMessages(maxMessages: number = 3) {
+        const messages = await prisma.message.findMany({
+            take: maxMessages,
+            orderBy: {
+                created_ai: 'desc'
+            },
+            include: { user: true }
+        });
+
+        return messages;
+    }
 }

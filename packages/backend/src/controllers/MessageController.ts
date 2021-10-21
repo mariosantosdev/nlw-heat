@@ -14,6 +14,18 @@ class MessageController {
 
         return res.json(result)
     }
+
+    async getMessages(req: Request, res: Response) {
+        const maxMessages = req.params?.maxMessages;
+        const numberLimitMessages = maxMessages ? Number(maxMessages) : 3;
+
+        const service = new MessageService();
+
+        const result = await service.getMessages(numberLimitMessages);
+
+
+        return res.json(result)
+    }
 }
 
 export default new MessageController();
