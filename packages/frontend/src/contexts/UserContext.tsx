@@ -58,6 +58,8 @@ export function UserProvider(props: UserProvider) {
             window.history.pushState({}, '', urlWithoutCode);
             api.post<AuthResponse>('/authenticate', { code: githubCode })
                 .then(({ data }) => {
+                    api.defaults.headers.common.authorization = `Bearer ${data.token}`;
+
                     localStorage.setItem('@heat:token', data.token);
                     setUser(data.user);
                 })
