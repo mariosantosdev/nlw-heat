@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import MessageService from "../services/MessageServices";
 
 class MessageController {
-    async handle(req: Request, res: Response) {
+    async create(req: Request, res: Response) {
         const { message } = req.body;
         const { user_id } = req;
 
