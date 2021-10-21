@@ -20,7 +20,7 @@ export default class MessageService {
         io.emit('new_message', info);
     }
 
-    async execute(text: string, owner_id: string) {
+    async create(text: string, owner_id: string) {
         const message = await prisma.message.create({
             data: {
                 text,

@@ -10,7 +10,7 @@ class MessageController {
 
         const service = new MessageService();
 
-        const result = await service.execute(message, user_id);
+        const result = await service.create(message, user_id);
 
         return res.json(result)
     }
